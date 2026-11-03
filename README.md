@@ -96,6 +96,8 @@ scripts/
 - 数字面板：`个公开仓库` / `个 Star` / `位关注者` / `篇博客文章`（`src/data/stats.ts`）
 - 「最近在写」列表也来自 `blog.json`：标题、日期、分类、摘要都从 feed 里提取，
   摘要会去掉正文开头重复的标题，日期按北京时间换算（和博客 URL 里的日期一致）
+- 博客 `_config.yml` 里 `feed.content` 开或关都兼容：开着从 `<content>` 截摘要，
+  关掉就用 `<summary>`；`feed.limit` 建议设 `0`，否则 feed 只输出前 N 篇，文章数会少算
 - 面板下方显示「数据更新于 X 年 X 月 X 日」，数据新鲜度一眼可见
 - 本地刷新：`npm run data`（GitHub 部分未认证 60 次/小时，够手跑；博客 feed 无限量）
 

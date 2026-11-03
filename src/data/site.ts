@@ -80,7 +80,7 @@ export const quickFacts = [
   { icon: 'linux', label: '主力桌面', value: 'Windows 11 + WSL2（Ubuntu）' },
   { icon: 'code', label: '常用编辑器', value: 'VS Code，偶尔 Neovim' },
   { icon: 'terminal', label: '第一门语言', value: 'C —— 从 51 单片机的点灯开始' },
-  { icon: 'cloud', label: '部署习惯', value: 'GitHub Actions + Cloudflare' },
+  { icon: 'cloud', label: '部署习惯', value: 'Vercel + Cloudflare' },
   { icon: 'cpu', label: '在学什么', value: '数据结构、Java Web、计算机网络' },
   { icon: 'book', label: '副业爱好', value: '骑行、摄影、收集好用的命令行工具' },
 ];

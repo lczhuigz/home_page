@@ -3,9 +3,9 @@
 仿 [iBug](https://ibug.io/) 的内容结构（首页 / 关于 / 项目 / 友链），用 **Astro** 重写成现代视觉版本：
 渐变光斑背景、玻璃拟态卡片、滚动入场动画、深浅色主题，全部是构建期生成的静态 HTML。
 
-- 站点：`https://me.lczhuigz.cn`（域名可在两处修改，见下文）
+- 站点：`https://me.lczhuigz.cn`（域名只配一处：`astro.config.mjs` 的 `site`，可用 `SITE_URL` 环境变量覆盖）
 - 技术栈：Astro 7 + 原生 CSS（无 Tailwind、无 UI 框架）+ 少量内联脚本
-- 产物：`dist/`，纯静态，可直接丢到 GitHub Pages / Cloudflare Pages / Vercel
+- 产物：`dist/`，纯静态，直接部署到 **Vercel**（也兼容 Cloudflare Pages / Netlify）
 
 ## 快速开始
 
@@ -48,8 +48,10 @@ src/
 └─ styles/global.css     设计令牌与全部样式（改配色从这里开始）
 ```
 
-`public/` 里放着 `avatar.jpg`（头像）、`og.png`（社交分享图，1200×630，由
-`python scripts/make-og.py` 生成）、`favicon.svg`、`CNAME`、`robots.txt`、`sitemap.xml`。
+`public/` 里只放静态资源：`avatar.jpg`（头像）、`og.png`（社交分享图，1200×630，由
+`python scripts/make-og.py` 生成）、`favicon.svg`、`grain.svg`（噪点纹理）。
+`robots.txt` 和 `sitemap.xml` 不是静态文件，而是由 `src/pages/robots.txt.ts`、
+`src/pages/sitemap.xml.ts` 在构建时按站点域名生成。
 
 ## 改成你自己的
 
@@ -59,27 +61,54 @@ src/
 4. **文章**：`src/data/posts.ts`（博客是独立 Hexo 站点，这里手填最近几篇）
 5. **友链**：`src/data/friends.ts`
 6. **主题色**：`src/styles/global.css` 里的 `--accent`、`--accent-2`、`--accent-3`
-7. **域名**：`astro.config.mjs` 的 `site`、`public/CNAME`、`public/robots.txt`、`public/sitemap.xml`
+7. **域名**：只改 `astro.config.mjs` 的 `site`（或在 Vercel 里设 `SITE_URL` 环境变量）。
+   canonical、`og:url`、`robots.txt`、`sitemap.xml` 全都会跟着变，不用再动别的文件。
 
-## 部署到 GitHub Pages + 自有域名
+## 部署到 Vercel
 
-1. 新建仓库（例如 `lczhuigz/homepage`），把本目录推上去，默认分支 `main`。
-2. 仓库 → **Settings → Pages → Build and deployment → Source** 选 **GitHub Actions**。
-   `.github/workflows/deploy.yml` 会在每次 push 后自动构建并发布。
-3. 域名解析：添加一条 CNAME 记录
-   `me` → `lczhuigz.github.io`（若用 Cloudflare 代理，把该记录设为「仅 DNS」或按需开橙云）。
-4. Pages 设置里填 `me.lczhuigz.cn` 并勾选 **Enforce HTTPS**。
-   `public/CNAME` 已经写好域名，构建后会自动出现在 `dist/` 根目录。
+### 方式一：网页导入（推荐）
 
-如果不想用自定义域名，改成项目路径部署：仓库名叫 `homepage` 时，
-在 `astro.config.mjs` 里把 `base: '/homepage'` 打开，并把 `site` 改成
-`https://lczhuigz.github.io`。
+1. 把仓库推到 GitHub（例如 `lczhuigz/homepage`），默认分支 `main`。
+2. 打开 [vercel.com/new](https://vercel.com/new)，**Import Git Repository**，选中该仓库。
+3. 框架会被识别为 **Astro**，保持默认即可：
+   - Framework Preset：`Astro`
+   - Build Command：`npm run build`
+   - Output Directory：`dist`
+   - Install Command：`npm install`
+   - Node 版本：`22.x`（Project → Settings → General → Node.js Version）
+4. 点 **Deploy**，首次会拿到 `xxx.vercel.app` 的地址。
+5. **绑定域名**：Project → Settings → Domains → 添加 `me.lczhuigz.cn`，
+   Vercel 会列出需要配置的 DNS 记录，在域名商（或 Cloudflare）那里加：
 
-## 部署到 Cloudflare Pages（备选）
+   | 类型 | 名称 | 值 |
+   |---|---|---|
+   | CNAME | `me` | `cname.vercel-dns.com` |
 
-- Build command：`npm run build`
-- Output directory：`dist`
-- Node 版本：22
+   > 域名托管在 Cloudflare 时：加完记录可以保持「仅 DNS」（灰云）；
+   > 想开橙云就把 SSL/TLS 设成 Full (strict)，避免重定向循环。Vercel 会自动签发证书。
+6. **设置环境变量 `SITE_URL`**（Project → Settings → Environment Variables）：
+   `SITE_URL=https://me.lczhuigz.cn`，然后 **Redeploy** 一次，
+   让 canonical / sitemap / robots 用正式域名（不设则用 `astro.config.mjs` 里的默认值）。
+
+### 方式二：命令行
+
+```bash
+npm i -g vercel
+vercel login
+vercel            # 首次会问项目配置，全部回车用默认值即可
+vercel --prod     # 发布到生产环境
+```
+
+### 每次更新
+
+`git push` 到 `main` 会自动触发构建发布；其他分支和 PR 会生成 Preview 地址。
+
+## 换到别的平台
+
+- **Cloudflare Pages**：Build command `npm run build`，Output directory `dist`，Node 22。
+- **Netlify**：同上，界面里填即可，不需要额外的配置文件。
+
+产物是纯 HTML / CSS / JS，没有服务端依赖，任何静态托管都能用。
 
 ## 说明
 

@@ -2,6 +2,9 @@
 dist/
 .astro/
 
+# 部署平台
+.vercel/
+
 # 依赖
 node_modules/
 .pnpm-store/

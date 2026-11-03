@@ -20,8 +20,10 @@ const {
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · 个人主页`;
-const canonical = new URL(Astro.url.pathname, site.url).href;
-const ogImage = new URL(image, site.url).href;
+// 域名以 astro.config.mjs 的 site（可用 SITE_URL 覆盖）为准
+const siteOrigin = Astro.site?.origin ?? site.url;
+const canonical = new URL(Astro.url.pathname, siteOrigin).href;
+const ogImage = new URL(image, siteOrigin).href;
 ---
 
 <!doctype html>

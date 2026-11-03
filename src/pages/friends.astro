@@ -7,6 +7,8 @@ import { site } from '../data/site';
 const groups: Friend['group'][] = ['一直联系', '经常串门'];
 const byGroup = (group: Friend['group']) => friends.filter((f) => f.group === group);
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
+// 域名跟随 astro.config.mjs 的 site
+const host = Astro.site?.host ?? site.url.replace('https://', '');
 ---
 
 <Base title="友链" description="lczhuigz 的友链：一起折腾的朋友，以及这个主页的灵感来源。">
@@ -83,7 +85,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
         </div>
         <div class="fact" style="display: block;">
           <p class="fact__label">地址</p>
-          <p class="fact__value mono">{site.url.replace('https://', '')}</p>
+          <p class="fact__value mono">{host}</p>
         </div>
         <div class="fact" style="display: block;">
           <p class="fact__label">简介</p>
@@ -91,7 +93,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
         </div>
         <div class="fact" style="display: block;">
           <p class="fact__label">头像</p>
-          <p class="fact__value mono">{site.url.replace('https://', '')}/avatar.jpg</p>
+          <p class="fact__value mono">{host}/avatar.jpg</p>
         </div>
       </div>
     </div>

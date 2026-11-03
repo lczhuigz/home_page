@@ -1,13 +1,19 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// 部署域名在这里改一处即可（同时更新 public/CNAME）。
+/**
+ * 站点域名只在这里配置一次：
+ * - 本地默认 https://me.lczhuigz.cn
+ * - 在 Vercel 后台设置环境变量 SITE_URL（例如 https://me.lczhuigz.cn 或 https://xxx.vercel.app），
+ *   构建时会自动采用，canonical / og:url / robots.txt / sitemap.xml 全部跟着变。
+ */
+const siteUrl = process.env.SITE_URL ?? 'https://me.lczhuigz.cn';
+
 export default defineConfig({
-  site: 'https://me.lczhuigz.cn',
+  site: siteUrl,
   compressHTML: true,
+  trailingSlash: 'ignore',
   build: {
     inlineStylesheets: 'auto',
   },
-  // 若最终部署在 GitHub Pages 的项目路径（如 /homepage/），把 base 改成 '/homepage'
-  // base: '/',
 });

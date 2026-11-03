@@ -791,6 +791,23 @@ html[data-theme='light'] .theme-toggle .moon {
   margin-top: 0.1rem;
 }
 
+.stats-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  opacity: 0.85;
+}
+
+.stats-meta__sep {
+  opacity: 0.5;
+}
+
 /* ---------- 9. ticker -------------------------------------------------- */
 .ticker {
   margin-top: clamp(2rem, 4vw, 3rem);

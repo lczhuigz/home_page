@@ -60,14 +60,6 @@ export const nav: NavItem[] = [
 /** 首屏滚动出现的关键词 */
 export const rotatingWords = ['写代码', '折腾 Linux', '骑单车', '拆单片机', '拍照片'];
 
-/** 首页数字面板 */
-export const stats = [
-  { value: '26', label: '个公开仓库' },
-  { value: '11', label: '篇博客文章' },
-  { value: '4', label: '个线上站点' },
-  { value: '∞', label: '次重装系统' },
-];
-
 /** 跑马灯里的技能关键词 */
 export const skillTicker = [
   'C', 'C++', 'Java', 'Python', 'HTML / CSS', 'JavaScript',

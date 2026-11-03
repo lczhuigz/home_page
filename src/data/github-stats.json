@@ -1,0 +1,33 @@
+{
+  "user": "lczhuigz",
+  "updatedAt": "2026-11-03T14:10:50.583Z",
+  "repos": 26,
+  "followers": 22,
+  "following": 58,
+  "stars": 14,
+  "forks": 3,
+  "topLanguages": [
+    {
+      "name": "C",
+      "count": 10
+    },
+    {
+      "name": "HTML",
+      "count": 3
+    },
+    {
+      "name": "Python",
+      "count": 2
+    },
+    {
+      "name": "Vue",
+      "count": 2
+    },
+    {
+      "name": "Java",
+      "count": 1
+    }
+  ],
+  "lastPush": "2026-11-03T10:22:53Z",
+  "reposScanned": 23
+}

@@ -1,0 +1,43 @@
+name: Update GitHub stats
+
+# 每天 UTC 02:10（北京时间 10:10）抓一次 GitHub 统计，
+# 数据有变化就 commit，Vercel 会因为这个 commit 自动重新部署。
+on:
+  schedule:
+    - cron: '10 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-stats
+  cancel-in-progress: true
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch stats
+        run: node scripts/fetch-stats.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: lczhuigz
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- src/data/github-stats.json; then
+            echo "统计没有变化，不提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/github-stats.json
+          git commit -m "chore: 更新 GitHub 统计 $(date -u +%Y-%m-%d)"
+          git push

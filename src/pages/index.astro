@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { heroSocials, rotatingWords, site, skillTicker, stats } from '../data/site';
+import { heroSocials, rotatingWords, site, skillTicker } from '../data/site';
+import { stats, statsUpdatedLabel } from '../data/stats';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
 
@@ -86,15 +87,22 @@ const ext = (external?: boolean) =>
       </div>
     </div>
 
-    <div class="stats reveal">
-      {
-        stats.map((s) => (
-          <div class="stat">
-            <div class="stat__value grad-text">{s.value}</div>
-            <div class="stat__label">{s.label}</div>
-          </div>
-        ))
-      }
+    <div class="reveal">
+      <div class="stats">
+        {
+          stats.map((s) => (
+            <div class="stat">
+              <div class="stat__value grad-text">{s.value}</div>
+              <div class="stat__label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="stats-meta">
+        <span>仓库 / Star / 关注者数据更新于 {statsUpdatedLabel}</span>
+        <span class="stats-meta__sep">·</span>
+        <span>来自 GitHub API</span>
+      </p>
     </div>
 
     <div class="ticker" aria-hidden="true">

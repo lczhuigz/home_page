@@ -15,6 +15,7 @@ npm run dev      # 本地开发，默认 http://localhost:4321
 npm run build    # 构建到 dist/
 npm run preview  # 本地预览构建产物（需要先 build）
 npm run verify   # 逐页 / 逐主题 / 桌面+移动截图到 .shots/，并检查横向溢出
+npm run stats    # 手动刷新 GitHub 统计（仓库数 / Star / 关注者）
 ```
 
 > 提示：如果 `pnpm` 因为 store 目录权限报 `ERR_PNPM_STORE_DIR_OPEN_OPERATION_LOCK`，
@@ -28,7 +29,9 @@ npm run verify   # 逐页 / 逐主题 / 桌面+移动截图到 .shots/，并检�
 ```
 src/
 ├─ data/                 ← 想改内容，基本只动这里
-│  ├─ site.ts            站点名、简介、社交链接、导航、统计、时间线
+│  ├─ site.ts            站点名、简介、社交链接、导航、时间线
+│  ├─ stats.ts           首页数字面板（读 github-stats.json）
+│  ├─ github-stats.json  GitHub 统计快照，自动生成，不要手改
 │  ├─ projects.ts        项目卡片（标题 / 描述 / 标签 / 主题色）
 │  ├─ posts.ts           「最近在写」的文章清单
 │  └─ friends.ts         友链与灵感来源
@@ -44,8 +47,15 @@ src/
 │  ├─ about.astro        关于：自我介绍 / 快问快答 / 技能 / 时间线
 │  ├─ projects.astro     全部项目 + 仓库清单
 │  ├─ friends.astro      友链 + 申请友链
+│  ├─ robots.txt.ts      robots.txt（按站点域名生成）
+│  ├─ sitemap.xml.ts     sitemap.xml（按站点域名生成）
 │  └─ 404.astro
 └─ styles/global.css     设计令牌与全部样式（改配色从这里开始）
+
+scripts/
+├─ fetch-stats.mjs       抓 GitHub 统计 → src/data/github-stats.json
+├─ make-og.py            生成 public/og.png 分享图
+└─ verify.mjs            截图 + 横向溢出检查
 ```
 
 `public/` 里只放静态资源：`avatar.jpg`（头像）、`og.png`（社交分享图，1200×630，由
@@ -63,6 +73,30 @@ src/
 6. **主题色**：`src/styles/global.css` 里的 `--accent`、`--accent-2`、`--accent-3`
 7. **域名**：只改 `astro.config.mjs` 的 `site`（或在 Vercel 里设 `SITE_URL` 环境变量）。
    canonical、`og:url`、`robots.txt`、`sitemap.xml` 全都会跟着变，不用再动别的文件。
+
+## 首页统计怎么来的
+
+数字面板的三个数字（公开仓库 / Star / 关注者）不是手写的，链路是：
+
+```
+.github/workflows/update-stats.yml（每天 UTC 02:10 + 可手动触发）
+  → node scripts/fetch-stats.mjs（GitHub REST API，用仓库自带 token，5000 次/小时）
+  → 有变化才写 src/data/github-stats.json
+  → bot commit 推回 main
+  → Vercel 检测到新 commit，自动重新部署
+```
+
+- 本地想立刻刷新：`npm run stats`（未认证 60 次/小时，只够一次手动跑）
+- 面板下方会显示「数据更新于 X 年 X 月 X 日」，数据新鲜度一眼可见
+- 「篇博客文章」因为博客是独立 Hexo 站点且没有 feed，仍然手填，
+  改 `src/data/stats.ts` 里的 `BLOG_POSTS` 即可
+
+> **为什么不构建时直接抓？** 每次部署都依赖 GitHub API：Vercel 构建机 IP 共享，
+> 未认证只有 60 次/小时，容易 403；国内本地构建也可能超时。
+> 把抓取放到 Actions、结果进仓库后，构建是零网络依赖的，历史也能 review。
+
+> 如果你给 `main` 开了分支保护（要求 PR），bot 的直推会被拒；两种解法：
+> 关掉「Include administrators」那条限制，或者让 workflow 开 PR 而不是直推。
 
 ## 部署到 Vercel
 

@@ -15,7 +15,9 @@ npm run dev      # 本地开发，默认 http://localhost:4321
 npm run build    # 构建到 dist/
 npm run preview  # 本地预览构建产物（需要先 build）
 npm run verify   # 逐页 / 逐主题 / 桌面+移动截图到 .shots/，并检查横向溢出
-npm run stats    # 手动刷新 GitHub 统计（仓库数 / Star / 关注者）
+npm run data     # 手动刷新全部数据（GitHub 统计 + 博客 feed）
+npm run stats    # 只刷新 GitHub 统计（仓库数 / Star / 关注者）
+npm run blog     # 只刷新博客数据（文章数 + 最近几篇）
 ```
 
 > 提示：如果 `pnpm` 因为 store 目录权限报 `ERR_PNPM_STORE_DIR_OPEN_OPERATION_LOCK`，
@@ -30,10 +32,11 @@ npm run stats    # 手动刷新 GitHub 统计（仓库数 / Star / 关注者）
 src/
 ├─ data/                 ← 想改内容，基本只动这里
 │  ├─ site.ts            站点名、简介、社交链接、导航、时间线
-│  ├─ stats.ts           首页数字面板（读 github-stats.json）
+│  ├─ stats.ts           首页数字面板（读两个 JSON）
 │  ├─ github-stats.json  GitHub 统计快照，自动生成，不要手改
+│  ├─ blog.json          博客快照（文章数 + 最近几篇），自动生成，不要手改
 │  ├─ projects.ts        项目卡片（标题 / 描述 / 标签 / 主题色）
-│  ├─ posts.ts           「最近在写」的文章清单
+│  ├─ posts.ts           「最近在写」，读 blog.json
 │  └─ friends.ts         友链与灵感来源
 ├─ layouts/Base.astro    <head>、SEO、导航、页脚、全局脚本
 ├─ components/
@@ -54,6 +57,7 @@ src/
 
 scripts/
 ├─ fetch-stats.mjs       抓 GitHub 统计 → src/data/github-stats.json
+├─ fetch-blog.mjs        解析博客 atom.xml → src/data/blog.json
 ├─ make-og.py            生成 public/og.png 分享图
 └─ verify.mjs            截图 + 横向溢出检查
 ```
@@ -68,32 +72,39 @@ scripts/
 1. **名字 / 简介 / 社交链接**：`src/data/site.ts`
 2. **头像**：替换 `public/avatar.jpg`（当前是 GitHub 头像）
 3. **项目**：`src/data/projects.ts`，`tone` 可选 `violet | cyan | pink | amber | lime`
-4. **文章**：`src/data/posts.ts`（博客是独立 Hexo 站点，这里手填最近几篇）
+4. **文章**：自动。`src/data/blog.json` 从博客 `atom.xml` 生成，不用手改；
+   换博客地址就改 `scripts/fetch-blog.mjs` 里的 `BLOG_FEED`（或 workflow 里的环境变量）
 5. **友链**：`src/data/friends.ts`
 6. **主题色**：`src/styles/global.css` 里的 `--accent`、`--accent-2`、`--accent-3`
 7. **域名**：只改 `astro.config.mjs` 的 `site`（或在 Vercel 里设 `SITE_URL` 环境变量）。
    canonical、`og:url`、`robots.txt`、`sitemap.xml` 全都会跟着变，不用再动别的文件。
 
-## 首页统计怎么来的
+## 首页数字怎么来的
 
-数字面板的三个数字（公开仓库 / Star / 关注者）不是手写的，链路是：
+四个数字都不是手写的，也没有一个是构建时联网抓的：
 
 ```
 .github/workflows/update-stats.yml（每天 UTC 02:10 + 可手动触发）
-  → node scripts/fetch-stats.mjs（GitHub REST API，用仓库自带 token，5000 次/小时）
-  → 有变化才写 src/data/github-stats.json
-  → bot commit 推回 main
+  ├─ node scripts/fetch-stats.mjs → src/data/github-stats.json
+  │    仓库数 / Star / 关注者 / 语言分布 / 最后 push（GitHub REST API，自带 token 5000 次/小时）
+  └─ node scripts/fetch-blog.mjs  → src/data/blog.json
+       文章总数 + 最近 6 篇（解析 https://blog.lczhuigz.cn/atom.xml）
+  → 任一文件有变化才 commit（bot 提交）
   → Vercel 检测到新 commit，自动重新部署
 ```
 
-- 本地想立刻刷新：`npm run stats`（未认证 60 次/小时，只够一次手动跑）
-- 面板下方会显示「数据更新于 X 年 X 月 X 日」，数据新鲜度一眼可见
-- 「篇博客文章」因为博客是独立 Hexo 站点且没有 feed，仍然手填，
-  改 `src/data/stats.ts` 里的 `BLOG_POSTS` 即可
+- 数字面板：`个公开仓库` / `个 Star` / `位关注者` / `篇博客文章`（`src/data/stats.ts`）
+- 「最近在写」列表也来自 `blog.json`：标题、日期、分类、摘要都从 feed 里提取，
+  摘要会去掉正文开头重复的标题，日期按北京时间换算（和博客 URL 里的日期一致）
+- 面板下方显示「数据更新于 X 年 X 月 X 日」，数据新鲜度一眼可见
+- 本地刷新：`npm run data`（GitHub 部分未认证 60 次/小时，够手跑；博客 feed 无限量）
 
-> **为什么不构建时直接抓？** 每次部署都依赖 GitHub API：Vercel 构建机 IP 共享，
-> 未认证只有 60 次/小时，容易 403；国内本地构建也可能超时。
+> **为什么不构建时直接抓？** 每次部署都依赖外网：Vercel 构建机 IP 共享，
+> GitHub API 未认证只有 60 次/小时，容易 403；国内本地构建也可能超时。
 > 把抓取放到 Actions、结果进仓库后，构建是零网络依赖的，历史也能 review。
+
+> 脚本只在数据真的变了才写文件（GitHub 比对数字，博客比对条数与列表），
+> 所以不会每天产生「只改了时间戳」的空提交。想手动触发：Actions → Update site data → Run workflow。
 
 > 如果你给 `main` 开了分支保护（要求 PR），bot 的直推会被拒；两种解法：
 > 关掉「Include administrators」那条限制，或者让 workflow 开 PR 而不是直推。

@@ -1,0 +1,56 @@
+{
+  "source": "https://blog.lczhuigz.cn/atom.xml",
+  "updatedAt": "2026-11-03T14:30:55.867Z",
+  "count": 11,
+  "latestAt": "2026-09-16",
+  "posts": [
+    {
+      "title": "国产银河麒麟操作系统安装JDK",
+      "href": "https://blog.lczhuigz.cn/2026/09/16/kylinos-install-jdk/",
+      "date": "2026-09-16",
+      "updated": "2026-09-16",
+      "category": "银河麒麟操作系统",
+      "summary": "本文以 Oracle JDK 为例，适用于大多数 Linux 发行版。 实际安装时，请根据自己的 CPU 架构、JDK 版本和安装路径替换命令中的版本号与目录名。 ⚠️ Linux 区分大小写，文件名、目录名、变量名都要…"
+    },
+    {
+      "title": "WSL 发行版安装后迁移到其他盘（完整指南）",
+      "href": "https://blog.lczhuigz.cn/2026/06/22/wsl-migration-to-other-drive/",
+      "date": "2026-06-22",
+      "updated": "2026-08-29",
+      "category": "WSL",
+      "summary": "为什么需要迁移 WSL 默认将发行版安装在 C 盘的用户目录下（例如 C:\\Users\\用户名\\AppData\\Local\\Packages\\... ），每个发行版对应一个 ext4.vhdx 虚拟磁盘文件。随着你在 W…"
+    },
+    {
+      "title": "极速安装 Claude Code + CC-Switch，接入 DeepSeek V4",
+      "href": "https://blog.lczhuigz.cn/2026/05/19/claude-code-access-deepseek/",
+      "date": "2026-05-19",
+      "updated": "2026-08-29",
+      "category": "技术教程",
+      "summary": "前言 Claude Code 是 Anthropic 出的终端 AI 编程助手，但官方 API 国内访问不便。好消息是 DeepSeek V4 提供了 Anthropic 兼容接口，再配合 CC-Switch 这个可视化…"
+    },
+    {
+      "title": "从小米运动健康到运动主页：骑行数据自动同步全攻略",
+      "href": "https://blog.lczhuigz.cn/2026/05/14/xiaomi-keep-sports-page/",
+      "date": "2026-05-14",
+      "updated": "2026-07-16",
+      "category": "技术教程",
+      "summary": "本文将介绍如何将小米运动健康的骑行数据，通过 Keep 中转，最终自动同步到你的个人运动主页（sports-page）。 背景 作为小米手环/手表的用户，我一直在用小米运动健康 App 记录骑行数据。但小米运动健康本身没…"
+    },
+    {
+      "title": "Github配置SSH",
+      "href": "https://blog.lczhuigz.cn/2025/11/15/Configure_SSH_on_Github/",
+      "date": "2025-11-15",
+      "updated": "2026-07-16",
+      "category": "技术教程",
+      "summary": "通过配置 SSH 密钥，咱就可以和 GitHub 安全地连接，不再需要每次操作都输入密码。整个过程很简单，主要包括：检查现有密钥、生成新密钥、将密钥添加到 GitHub，以及测试连接。 配置过程流程图： flowchar…"
+    },
+    {
+      "title": "青云志",
+      "href": "https://blog.lczhuigz.cn/2025/08/30/%E9%9D%92%E4%BA%91%E5%BF%97/",
+      "date": "2025-08-30",
+      "updated": "2026-09-14",
+      "category": "随记",
+      "summary": "无人扶我青云志， 我自踏雪至山巅。 若是命中无此运， 孤身亦可登昆仑。 红尘赠我三尺剑， 酒看瘦马一世街。 世人朝路乃绝涧， 独见众生止步前。 海到尽头天作岸， 山登绝顶我为峰。 如若东山能再起， 大鹏展翅九万里。 一入…"
+    }
+  ]
+}

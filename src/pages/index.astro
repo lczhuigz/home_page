@@ -1,0 +1,172 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { heroSocials, rotatingWords, site, skillTicker, stats } from '../data/site';
+import { projects } from '../data/projects';
+import { posts } from '../data/posts';
+
+const featured = projects.filter((p) => p.featured);
+const latest = posts.slice(0, 4);
+const words = JSON.stringify(rotatingWords);
+
+/** 新窗口打开外部链接 */
+const ext = (external?: boolean) =>
+  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
+---
+
+<Base>
+  <section class="hero container">
+    <div class="hero__grid">
+      <div>
+        <span class="hero__badge">
+          <span class="pulse-dot"></span>
+          正在学习 · 欢迎交换友链
+        </span>
+
+        <h1 class="hero__title">
+          你好，我是<br />
+          <span class="grad-text">{site.name}</span>
+        </h1>
+
+        <p class="hero__sub">
+          <span class="mono">/</span>
+          <span data-rotating data-words={words}>写代码</span>
+          <span class="caret"></span>
+        </p>
+
+        <p class="hero__desc">
+          {site.role}。喜欢把环境配到顺手、把踩过的坑写成笔记，也喜欢骑车出去看看。
+          这个主页用来收拢我散落在各处的站点、仓库和文字。
+        </p>
+
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="/projects/">
+            看看我做了什么
+            <Icon name="arrow" size={15} class="btn__arrow" />
+          </a>
+          <a class="btn" href={site.blogUrl} {...ext(true)}>
+            <Icon name="hexo" size={15} />
+            去博客逛逛
+          </a>
+        </div>
+
+        <ul class="hero__socials">
+          {
+            heroSocials.map((s) => (
+              <li>
+                <a class="social-link" href={s.href} {...ext(s.external)}>
+                  <Icon name={s.icon} size={15} />
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="hero__portrait reveal">
+        <div class="portrait__ring" aria-hidden="true"></div>
+        <div class="portrait__ring portrait__ring--slow" aria-hidden="true"></div>
+        <div class="portrait__frame">
+          <img
+            src={site.avatar}
+            alt={`${site.name} 的头像`}
+            width="360"
+            height="360"
+            loading="eager"
+          />
+        </div>
+        <span class="portrait__chip portrait__chip--tl mono">
+          <Icon name="terminal" size={12} /> ssh lczhuigz@home
+        </span>
+        <span class="portrait__chip portrait__chip--br mono">
+          <Icon name="bolt" size={12} /> uptime 99.9%
+        </span>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      {
+        stats.map((s) => (
+          <div class="stat">
+            <div class="stat__value grad-text">{s.value}</div>
+            <div class="stat__label">{s.label}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        {[...skillTicker, ...skillTicker].map((s) => <span class="ticker__item">{s}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="work">
+    <div class="section-head reveal">
+      <div class="section-head__text">
+        <span class="eyebrow">01 / Selected Work</span>
+        <h2>做过的东西</h2>
+        <p>从博客、运动数据到图床，每一件都是「自己用得上」才动手做的。</p>
+      </div>
+      <a class="link-more" href="/projects/">
+        全部项目 <Icon name="arrow" size={13} />
+      </a>
+    </div>
+
+    <div class="projects">
+      {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head reveal">
+      <div class="section-head__text">
+        <span class="eyebrow">02 / Journal</span>
+        <h2>最近在写</h2>
+        <p>大部分是环境配置和踩坑记录，方便下一次的自己。</p>
+      </div>
+      <a class="link-more" href={site.blogUrl} {...ext(true)}>
+        全部文章 <Icon name="arrow" size={13} />
+      </a>
+    </div>
+
+    <div class="posts reveal">
+      {
+        latest.map((post) => (
+          <a class="post-row" href={post.href} {...ext(true)}>
+            <span class="post-row__date">{post.date.replaceAll('-', '.')}</span>
+            <span>
+              <span class="post-row__title">{post.title}</span>
+              <span class="post-row__summary">{post.summary}</span>
+            </span>
+            <span class="post-row__cat">{post.category}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="panel reveal">
+      <span class="eyebrow">03 / About</span>
+      <h2 style="margin-top: 0.75rem;">一个还在不断加载中的开发者</h2>
+      <p class="prose" style="margin-top: 1rem;">
+        我是 <strong>{site.name}</strong>，计算机专业在读。日常是上课、写代码、修环境，
+        以及把「为什么又跑不起来」变成一篇能救下一个自己的文章。
+        如果你也对 Linux、单片机和把数据搬来搬去感兴趣，欢迎来聊聊。
+      </p>
+      <div class="hero__cta" style="margin-top: 1.6rem;">
+        <a class="btn" href="/about/">
+          关于我的更多 <Icon name="arrow" size={14} />
+        </a>
+        <a class="btn" href={`mailto:${site.email}`}>
+          <Icon name="mail" size={14} />
+          写封邮件
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

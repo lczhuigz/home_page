@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index?: number;
+}
+
+const { project, index = 0 } = Astro.props;
+const primaryHref = project.href ?? project.repo ?? '#';
+const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
+---
+
+<article
+  class:list={['card', `card--${project.tone}`, 'reveal']}
+  style={`--d:${Math.min(index, 5) * 70}ms`}
+>
+  <div class="card__top">
+    <span class="card__kicker">{project.kicker}</span>
+    {project.status && <span class="card__status">{project.status}</span>}
+  </div>
+
+  <div>
+    <h3 class="card__title">{project.title}</h3>
+    <p class="card__sub">{project.subtitle}</p>
+  </div>
+
+  <p class="card__desc">{project.description}</p>
+
+  <ul class="card__tags">
+    {project.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+
+  <div class="card__foot">
+    <a class="card__cta" href={primaryHref} {...ext}>
+      去看看
+      <Icon name="arrow" size={14} />
+    </a>
+    {
+      project.repo && project.href && (
+        <a class="card__repo" href={project.repo} {...ext} aria-label={`${project.title} 源码`}>
+          源码
+        </a>
+      )
+    }
+  </div>
+
+  <a
+    class="card__link-layer"
+    href={primaryHref}
+    {...ext}
+    tabindex="-1"
+    aria-hidden="true"
+  ></a>
+</article>

@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { quickFacts, site, socials, timeline } from '../data/site';
+
+/** 新窗口打开外部链接 */
+const ext = (external?: boolean) =>
+  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
+
+const skills = [
+  {
+    title: '语言',
+    items: ['C', 'C++', 'Java', 'Python', 'JavaScript', 'SQL'],
+  },
+  {
+    title: '工具与系统',
+    items: ['Linux / WSL2', 'Git', 'Docker', 'Nginx', 'VS Code', 'Cloudflare'],
+  },
+  {
+    title: '正在补的课',
+    items: ['数据结构与算法', '计算机网络', 'Java Web', '前端工程化'],
+  },
+];
+---
+
+<Base title="关于" description={`关于 ${site.name}：一个爱折腾 Linux、单片机和前端的计算机专业学生。`}>
+  <header class="page-head container">
+    <span class="eyebrow">About</span>
+    <h1>关于<span class="grad-text">我</span></h1>
+    <p>{site.role}</p>
+  </header>
+
+  <section class="container">
+    <div class="prose reveal">
+      <p>
+        我叫 <strong>{site.name}</strong>，计算机专业在读。如果要用一句话概括我：
+        <strong>看到什么工具好用，就想拆开看看它怎么工作的那种人。</strong>
+      </p>
+      <p>
+        真正开始写代码，是从 51 单片机点第一个 LED 开始的——那时候还得算延时、看时序图，
+        但灯亮起来的瞬间确实很上头。后来顺着这条路学了 C、C++，又在课程里接触了 Java 和 Python，
+        现在更多时间花在前端和一些「把东西跑起来」的活上。
+      </p>
+      <p>
+        我习惯把过程写下来。<a href={site.blogUrl} target="_blank" rel="noopener noreferrer">博客</a>
+        里大部分是环境配置和排错记录：WSL 迁移、麒麟系统装 JDK、VS Code 配 MinGW……
+        这些内容对别人也许没什么用，但对我自己来说，是一份「下次不用再从零开始」的存档。
+      </p>
+      <p>
+        除了代码，我也骑车、拍照、看很长的视频。这个主页就是把这些东西收在一起的地方。
+      </p>
+    </div>
+
+    <div class="section-head reveal" style="margin-top: 3.5rem;">
+      <div class="section-head__text">
+        <span class="eyebrow">01 / Quick Facts</span>
+        <h2>快问快答</h2>
+      </div>
+    </div>
+
+    <div
+      class="about-grid"
+      style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));"
+    >
+      {
+        quickFacts.map((fact, i) => (
+          <div class="fact reveal" style={`--d:${i * 60}ms`}>
+            <span class="fact__icon">
+              <Icon name={fact.icon} size={17} />
+            </span>
+            <span>
+              <span class="fact__label">{fact.label}</span>
+              <span class="fact__value" style="display: block;">{fact.value}</span>
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section-head reveal" style="margin-top: 3.5rem;">
+      <div class="section-head__text">
+        <span class="eyebrow">02 / Toolkit</span>
+        <h2>手边的东西</h2>
+        <p>说不上精通，但能拿来把想法变成能跑的东西。</p>
+      </div>
+    </div>
+
+    <div
+      class="about-grid"
+      style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));"
+    >
+      {
+        skills.map((group, i) => (
+          <div class="fact reveal" style={`--d:${i * 70}ms; display: block;`}>
+            <p class="fact__label">{group.title}</p>
+            <ul class="card__tags" style="margin-top: 0.6rem;">
+              {group.items.map((item) => <li class="tag">{item}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section-head reveal" style="margin-top: 3.5rem;">
+      <div class="section-head__text">
+        <span class="eyebrow">03 / Timeline</span>
+        <h2>时间线</h2>
+      </div>
+    </div>
+
+    <ol class="timeline">
+      {
+        timeline.map((item) => (
+          <li class="reveal">
+            <span class="timeline__year">{item.year}</span>
+            <p class="timeline__title">{item.title}</p>
+            <p class="timeline__body">{item.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="panel reveal" style="margin-top: 3.5rem;">
+      <span class="eyebrow">04 / Elsewhere</span>
+      <h2 style="margin-top: 0.8rem; font-size: clamp(1.4rem, 3vw, 1.9rem);">在别的地方找到我</h2>
+      <ul class="hero__socials" style="margin-top: 1.2rem;">
+        {
+          socials.map((s) => (
+            <li>
+              <a class="social-link" href={s.href} {...ext(s.external)}>
+                <Icon name={s.icon} size={15} />
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>

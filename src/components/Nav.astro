@@ -1,0 +1,118 @@
+---
+import Icon from './Icon.astro';
+import { nav, site } from '../data/site';
+
+const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) =>
+  !href.startsWith('http') && (href.replace(/\/+$/, '') || '/') === current;
+
+/** 新窗口打开外部链接 */
+const ext = (external?: boolean) =>
+  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
+---
+
+<header class="nav" id="site-nav">
+  <div class="container nav__inner">
+    <a class="brand" href="/" aria-label={`${site.name} 首页`}>
+      <span class="brand__mark" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</span>
+      <span class="brand__text">{site.name}</span>
+    </a>
+
+    <nav aria-label="主导航">
+      <ul class="nav__links">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                class:list={['nav__link', { 'nav__link--accent': item.accent }]}
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                {...ext(item.external)}
+              >
+                {item.label}
+                {item.external && <Icon name="arrow" size={12} class="nav__link-icon" />}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="icon-btn" href={site.github} {...ext(true)} aria-label="GitHub">
+        <Icon name="github" size={17} />
+      </a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="切换深浅色主题">
+        <Icon name="moon" size={17} class="moon" />
+        <Icon name="sun" size={17} class="sun" />
+      </button>
+      <button
+        class="icon-btn nav__mobile"
+        type="button"
+        data-drawer-open
+        aria-label="打开导航菜单"
+        aria-expanded="false"
+        aria-controls="site-drawer"
+      >
+        <Icon name="menu" size={18} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  class="drawer"
+  id="site-drawer"
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  aria-label="导航菜单"
+>
+  <div class="drawer__head">
+    <span class="brand">
+      <span class="brand__mark" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</span>
+      <span class="brand__text">{site.name}</span>
+    </span>
+    <button class="icon-btn" type="button" data-drawer-close aria-label="关闭导航菜单">
+      <Icon name="close" size={18} />
+    </button>
+  </div>
+  <nav aria-label="移动端导航">
+    <ul class="drawer__nav">
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} {...ext(item.external)}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav__link--accent {
+    color: var(--text);
+  }
+
+  .nav__link--accent::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    margin-right: 0.15rem;
+  }
+
+  .nav__link-icon {
+    opacity: 0.55;
+  }
+</style>

@@ -1,0 +1,22 @@
+{
+  "name": "lczhuigz-homepage",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "lczhuigz 的个人主页 —— Astro 静态站点",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.8",
+    "simple-icons": "^16.36.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}

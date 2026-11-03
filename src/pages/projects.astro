@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site } from '../data/site';
+import { projects } from '../data/projects';
+
+const repos = [
+  { name: 'data_structure_course', lang: 'C', note: '数据结构课程作业' },
+  { name: 'java_web_course', lang: 'Java', note: 'Java Web 实验代码' },
+  { name: 'python_course', lang: 'Python', note: 'Python 课程练习' },
+  { name: 'cpp-learning', lang: 'C++', note: '学习 C/C++ 时的小例子' },
+  { name: 'preparation-for-the-cepa', lang: 'C', note: '备赛 / 备考用的一些练习' },
+  { name: 'lczhuigz', lang: 'Markdown', note: 'GitHub 主页的 README' },
+];
+
+const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
+---
+
+<Base
+  title="项目"
+  description="lczhuigz 做过和正在做的项目：博客、运动主页、图床、相册与课程代码。"
+>
+  <header class="page-head container">
+    <span class="eyebrow">Projects</span>
+    <h1>做过<span class="grad-text">的东西</span></h1>
+    <p>
+      大部分项目都是「自己有个需求」才开始的：想记笔记就有了博客，想追踪骑行就有了运动主页，
+      想让图片有个稳定的家就有了图床。下面是还活着的那些。
+    </p>
+  </header>
+
+  <section class="container">
+    <div class="projects">
+      {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </div>
+
+    <div class="section-head reveal" style="margin-top: 4rem;">
+      <div class="section-head__text">
+        <span class="eyebrow">Repositories</span>
+        <h2>还有一些仓库</h2>
+        <p>课程代码和练习大多在这里，写得不漂亮，但都是自己敲过的。</p>
+      </div>
+      <a class="link-more" href={site.github} {...ext}>
+        全部仓库 <Icon name="arrow" size={13} />
+      </a>
+    </div>
+
+    <div class="posts reveal">
+      {
+        repos.map((repo) => (
+          <a class="post-row" href={`${site.github}/${repo.name}`} {...ext}>
+            <span class="post-row__date">{repo.lang}</span>
+            <span>
+              <span class="post-row__title mono">{repo.name}</span>
+              <span class="post-row__summary">{repo.note}</span>
+            </span>
+            <span class="post-row__cat">GitHub</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Base>

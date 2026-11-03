@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { friends, inspirations, type Friend } from '../data/friends';
+import { site } from '../data/site';
+
+const groups: Friend['group'][] = ['一直联系', '经常串门'];
+const byGroup = (group: Friend['group']) => friends.filter((f) => f.group === group);
+const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
+---
+
+<Base title="友链" description="lczhuigz 的友链：一起折腾的朋友，以及这个主页的灵感来源。">
+  <header class="page-head container">
+    <span class="eyebrow">Friends</span>
+    <h1>我的<span class="grad-text">朋友们</span></h1>
+    <p>互联网上认识的一些人，他们的站点比我的更新勤快得多。也欢迎交换友链。</p>
+  </header>
+
+  <section class="container">
+    {
+      groups.map((group) => (
+        <div class="reveal">
+          <p class="group-title">{group}</p>
+          <div class="friends-grid">
+            {byGroup(group).map((friend) => (
+              <a class="friend" href={friend.href} {...ext}>
+                <span class="friend__avatar" aria-hidden="true">
+                  <span>{friend.name.slice(0, 1).toUpperCase()}</span>
+                  {friend.avatar && (
+                    <img src={friend.avatar} alt="" loading="lazy" onerror="this.remove()" />
+                  )}
+                </span>
+                <span>
+                  <span class="friend__name">{friend.name}</span>
+                  <span class="friend__desc" style="display: block;">{friend.description}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <p class="group-title reveal">参考与灵感</p>
+    <div
+      class="friends-grid reveal"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 232px), 1fr));"
+    >
+      {
+        inspirations.map((item) => (
+          <a class="friend" href={item.href} {...ext}>
+            <span
+              class="friend__avatar"
+              style="background: var(--surface-2); color: var(--text-soft);"
+            >
+              <Icon name="link" size={18} />
+            </span>
+            <span>
+              <span class="friend__name">{item.name}</span>
+              <span class="friend__desc" style="display: block;">{item.note}</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="panel reveal" style="margin-top: 3rem;">
+      <span class="eyebrow">Link Exchange</span>
+      <h2 style="margin-top: 0.8rem; font-size: clamp(1.4rem, 3vw, 1.9rem);">交换友链？</h2>
+      <p class="prose" style="margin-top: 1rem;">
+        欢迎直接发邮件到 <a href={`mailto:${site.email}`}>{site.email}</a>，或者
+        <a href={site.github} {...ext}>在 GitHub 上找我</a>。如果你的站点也是个人博客、笔记或者
+        作品集，我一般都会加。
+      </p>
+
+      <div
+        class="about-grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));"
+      >
+        <div class="fact" style="display: block;">
+          <p class="fact__label">名称</p>
+          <p class="fact__value">{site.name}</p>
+        </div>
+        <div class="fact" style="display: block;">
+          <p class="fact__label">地址</p>
+          <p class="fact__value mono">{site.url.replace('https://', '')}</p>
+        </div>
+        <div class="fact" style="display: block;">
+          <p class="fact__label">简介</p>
+          <p class="fact__value">计算机在读，爱折腾 Linux 与单片机</p>
+        </div>
+        <div class="fact" style="display: block;">
+          <p class="fact__label">头像</p>
+          <p class="fact__value mono">{site.url.replace('https://', '')}/avatar.jpg</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

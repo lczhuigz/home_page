@@ -1,0 +1,29 @@
+# 构建产物
+dist/
+.astro/
+
+# 依赖
+node_modules/
+.pnpm-store/
+.npm-cache/
+package-lock.json.bak
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# 本地验证产物
+.shots/
+.chrome-profile*/
+verify-*.png
+
+# 环境变量
+.env
+.env.production
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

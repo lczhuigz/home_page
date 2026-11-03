@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+
+<Base title="页面走丢了" description="这个地址没有内容，回首页看看吧。" noindex>
+  <section
+    class="container"
+    style="min-height: 68svh; display: grid; place-content: center; text-align: center;"
+  >
+    <p class="eyebrow" style="justify-self: center;">404 / Not Found</p>
+    <h1 style="margin-top: 1rem; font-size: clamp(4rem, 18vw, 9rem); line-height: 0.9;">
+      <span class="grad-text">404</span>
+    </h1>
+    <p class="lede" style="margin-top: 1.25rem; justify-self: center;">
+      这个页面可能被我搬走了，或者它从来就没存在过。<br />
+      就像那些年重装过的系统。
+    </p>
+    <div class="hero__cta" style="justify-content: center; margin-top: 2rem;">
+      <a class="btn btn--primary" href="/">
+        回首页
+        <Icon name="arrow" size={15} class="btn__arrow" />
+      </a>
+      <a class="btn" href={site.blogUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="hexo" size={15} />
+        去博客
+      </a>
+    </div>
+  </section>
+</Base>

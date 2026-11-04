@@ -23,7 +23,7 @@ export const friends: Friend[] = [
     href: 'https://zarijaden.cc.cd/',
     description: '万物可爱，生活明朗',
     avatar: 'https://zarijaden.cc.cd/images/logo.jpg',
-    group: '一直联系',
+    group: '经常串门',
   },
   {
     name: 'KOK.PLUS',

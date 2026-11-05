@@ -7,7 +7,7 @@ export const site = {
   url: 'https://me.lczhuigz.cn',
   name: 'lczhuigz',
   /** 中文名 / 昵称，留空则页面上只显示 lczhuigz */
-  nameZh: '段辉园',
+  nameZh: '',
   role: '计算机专业在读 · 什么都想试一点的折腾型选手',
   tagline: 'You Only Live Once —— 把折腾过的东西都留在这里。',
   description:

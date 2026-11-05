@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { heroSocials, rotatingWords, site, skillTicker } from '../data/site';
+import { displayName, heroSocials, rotatingWords, site, skillTicker } from '../data/site';
 import { stats, statsUpdatedLabel } from '../data/stats';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
@@ -24,7 +24,10 @@ const words = JSON.stringify(rotatingWords);
 
         <h1 class="hero__title">
           你好，我是<br />
-          <span class="grad-text">{site.name}</span>
+          <span class="hero__name">
+            <span class="grad-text">{displayName}</span>
+            {site.nameZh && <span class="hero__handle">@{site.name}</span>}
+          </span>
         </h1>
 
         <p class="hero__sub">
@@ -69,7 +72,7 @@ const words = JSON.stringify(rotatingWords);
         <div class="portrait__frame">
           <img
             src={site.avatar}
-            alt={`${site.name} 的头像`}
+            alt={`${displayName} 的头像`}
             width="360"
             height="360"
             loading="eager"
@@ -159,7 +162,7 @@ const words = JSON.stringify(rotatingWords);
       <span class="eyebrow">03 / About</span>
       <h2 style="margin-top: 0.75rem;">一个还在不断加载中的开发者</h2>
       <p class="prose" style="margin-top: 1rem;">
-        我是 <strong>{site.name}</strong>，计算机专业在读。日常是上课、写代码、修环境，
+        我是 <strong>{displayName}</strong>，计算机专业在读。日常是上课、写代码、修环境，
         以及把「为什么又跑不起来」变成一篇能救下一个自己的文章。
         如果你也对 Linux、单片机和把数据搬来搬去感兴趣，欢迎来聊聊。
       </p>

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { quickFacts, site, socials, timeline } from '../data/site';
+import { displayName, quickFacts, site, socials, timeline } from '../data/site';
 import { attrsForSocial } from '../lib/links';
 
 const skills = [
@@ -20,17 +20,20 @@ const skills = [
 ];
 ---
 
-<Base title="关于" description={`关于 ${site.name}：一个爱折腾 Linux、单片机和前端的计算机专业学生。`}>
+<Base
+  title="关于"
+  description={`关于 ${displayName}（${site.name}）：一个爱折腾 Linux、单片机和前端的计算机专业学生。`}
+>
   <header class="page-head container">
     <span class="eyebrow">About</span>
-    <h1>关于<span class="grad-text">我</span></h1>
+    <h1>关于<span class="grad-text">{displayName}</span></h1>
     <p>{site.role}</p>
   </header>
 
   <section class="container">
     <div class="prose reveal">
       <p>
-        我叫 <strong>{site.name}</strong>，计算机专业在读。如果要用一句话概括我：
+        我叫 <strong>{displayName}</strong>{site.nameZh && `（@${site.name}）`}，计算机专业在读。如果要用一句话概括我：
         <strong>看到什么工具好用，就想拆开看看它怎么工作的那种人。</strong>
       </p>
       <p>

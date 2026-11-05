@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { nav, site } from '../data/site';
+import { displayName, nav, site } from '../data/site';
 import { attrsFor, externalAttrs } from '../lib/links';
 
 const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -10,9 +10,9 @@ const isActive = (href: string) =>
 
 <header class="nav" id="site-nav">
   <div class="container nav__inner">
-    <a class="brand" href="/" aria-label={`${site.name} 首页`}>
-      <span class="brand__mark" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</span>
-      <span class="brand__text">{site.name}</span>
+    <a class="brand" href="/" aria-label={`${displayName} 首页`}>
+      <span class="brand__mark" aria-hidden="true">{displayName.slice(0, 1).toUpperCase()}</span>
+      <span class="brand__text">{displayName}</span>
     </a>
 
     <nav aria-label="主导航">
@@ -68,8 +68,8 @@ const isActive = (href: string) =>
 >
   <div class="drawer__head">
     <span class="brand">
-      <span class="brand__mark" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</span>
-      <span class="brand__text">{site.name}</span>
+      <span class="brand__mark" aria-hidden="true">{displayName.slice(0, 1).toUpperCase()}</span>
+      <span class="brand__text">{displayName}</span>
     </span>
     <button class="icon-btn" type="button" data-drawer-close aria-label="关闭导航菜单">
       <Icon name="close" size={18} />

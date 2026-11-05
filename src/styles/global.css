@@ -553,6 +553,23 @@ html[data-theme='light'] .theme-toggle .moon {
   color: transparent;
 }
 
+/* 中文名 + 英文 handle 排在同一行的基线上 */
+.hero__name {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.55rem;
+}
+
+.hero__handle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
 .hero__sub {
   margin-top: 0.35rem;
   font-family: var(--font-mono);

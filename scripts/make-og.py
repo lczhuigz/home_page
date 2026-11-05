@@ -47,13 +47,13 @@ def grid(canvas: Image.Image, step: int = 60, alpha: int = 14) -> None:
     canvas.alpha_composite(overlay)
 
 
-def gradient_text(canvas: Image.Image, xy: tuple[int, int], text: str, font, stops) -> None:
-    """给文字填充从左到右的渐变。"""
+def gradient_text(canvas: Image.Image, xy: tuple[int, int], text: str, font, stops):
+    """给文字填充从左到右的渐变，返回实际绘制的 (x, y, w, h)。"""
     mask = Image.new("L", canvas.size, 0)
     ImageDraw.Draw(mask).text((0, 0), text, font=font, fill=255)
     bbox = mask.getbbox()
     if not bbox:
-        return
+        return None
     mask = mask.crop(bbox)
     w, h = mask.size
 
@@ -72,6 +72,7 @@ def gradient_text(canvas: Image.Image, xy: tuple[int, int], text: str, font, sto
             px[x, y] = c
 
     canvas.paste(strip, (xy[0] + bbox[0], xy[1] + bbox[1]), mask)
+    return (xy[0] + bbox[0], xy[1] + bbox[1], w, h)
 
 
 def main() -> None:
@@ -87,21 +88,35 @@ def main() -> None:
     # 左上角标记
     draw.rounded_rectangle((72, 64, 136, 128), radius=18, fill=(139, 92, 246, 255))
     logo_font = load_font("bold", 34)
-    draw.text((104, 96), "L", font=logo_font, fill=(255, 255, 255, 255), anchor="mm")
+    draw.text((104, 96), "段", font=logo_font, fill=(255, 255, 255, 255), anchor="mm")
     draw.text((152, 96), "lczhuigz", font=load_font("bold", 26), fill=(236, 237, 245, 255), anchor="lm")
 
-    # 主标题
-    gradient_text(canvas, (72, 200), "lczhuigz", load_font("bold", 132), [(167, 139, 250), (139, 92, 246), (34, 211, 238)])
+    # 主标题：中文名 + 英文 handle（跟在名字右下，基线对齐）
+    name_box = gradient_text(
+        canvas,
+        (72, 186),
+        "段辉园",
+        load_font("bold", 148),
+        [(167, 139, 250), (139, 92, 246), (34, 211, 238)],
+    )
+    if name_box:
+        draw.text(
+            (name_box[0] + name_box[2] + 24, name_box[1] + name_box[3] - 6),
+            "@lczhuigz",
+            font=load_font("mono", 32),
+            fill=(150, 155, 178, 255),
+            anchor="ls",
+        )
 
     draw.text(
-        (74, 400),
-        "计算机专业在读 · 什么都想试一点的折腾型选手",
-        font=load_font("regular", 34),
+        (74, 410),
+        "计算机专业在读，什么都想试一点的折腾型选手",
+        font=load_font("regular", 30),
         fill=(200, 203, 218, 255),
     )
 
     draw.text(
-        (74, 458),
+        (74, 462),
         "博客 · 运动数据 · 自建图床 · 51 单片机",
         font=load_font("regular", 24),
         fill=(132, 137, 158, 255),
@@ -120,7 +135,7 @@ def main() -> None:
     draw.text((72, 566), "me.lczhuigz.cn", font=load_font("mono", 24), fill=(236, 237, 245, 255))
     draw.text(
         (W - 72, 566),
-        "Astro · GitHub Pages",
+        "Astro · Vercel",
         font=load_font("mono", 20),
         fill=(125, 130, 150, 255),
         anchor="ra",

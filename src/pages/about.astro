@@ -5,9 +5,9 @@ import {
   awards,
   blogTopics,
   certificates,
-  displayName,
   education,
   quickFacts,
+  realName,
   site,
   socials,
   techStack,
@@ -18,18 +18,18 @@ import { attrsForSocial, externalAttrs } from '../lib/links';
 
 <Base
   title="关于"
-  description={`关于 ${displayName}（${site.name}）：计算机科学与技术专业在读，嵌入式与 FPGA 方向，记录 C/C++、单片机、硬件调试与 Linux 实践。`}
+  description={`关于 ${realName}（${site.name}）：计算机科学与技术专业在读，嵌入式与 FPGA 方向，记录 C/C++、单片机、硬件调试与 Linux 实践。`}
 >
   <header class="page-head container">
     <span class="eyebrow">About</span>
-    <h1>关于<span class="grad-text">{displayName}</span></h1>
+    <h1>关于<span class="grad-text">我</span></h1>
     <p>{site.role}</p>
   </header>
 
   <section class="container">
     <div class="prose reveal">
       <p>
-        我是 <strong>{displayName}</strong>{site.nameZh && `（@${site.name}）`}，现在在
+        我是 <strong>{realName}</strong>{realName && `（@${site.name}）`}，现在在
         <strong>湖北文理学院理工学院</strong>读计算机科学与技术（专升本），
         之前在<strong>湖北三峡职业技术大学</strong>学电子信息工程技术。
         我对硬件的底层世界一直很好奇，相信<strong>代码能赋予硬件灵魂</strong>，

@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Backdrop from '../components/Backdrop.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { displayName, site, socials } from '../data/site';
+import { site, socials } from '../data/site';
 
 interface Props {
   title?: string;
@@ -19,20 +19,17 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title
-  ? `${title} · ${displayName}`
-  : `${displayName} · ${site.name}`;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · 个人主页`;
 // 域名以 astro.config.mjs 的 site（可用 SITE_URL 覆盖）为准
 const siteOrigin = Astro.site?.origin ?? site.url;
 const canonical = new URL(Astro.url.pathname, siteOrigin).href;
 const ogImage = new URL(image, siteOrigin).href;
 
-// 结构化数据：让搜索结果认得出「段辉园 = lczhuigz」
+// 结构化数据：站点对外用 handle，中文名只在关于页正文里出现
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: displayName,
-  alternateName: site.name,
+  name: site.name,
   jobTitle: site.role,
   url: siteOrigin,
   image: ogImage,
@@ -54,7 +51,7 @@ const personJsonLd = {
     <link rel="apple-touch-icon" href="/avatar.jpg" />
     <meta name="theme-color" content="#06060b" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f4f4f9" media="(prefers-color-scheme: light)" />
-    <meta name="author" content={site.nameZh ? `${displayName} (${site.name})` : site.name} />
+    <meta name="author" content={site.name} />
     <meta name="keywords" content={site.keywords.join(', ')} />
 
     <meta property="og:type" content="website" />
@@ -66,7 +63,7 @@ const personJsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${displayName} 的个人主页`} />
+    <meta property="og:image:alt" content={`${site.name} 的个人主页`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />

@@ -71,11 +71,11 @@ scripts/
 ## 改成你自己的
 
 1. **名字 / 简介 / 社交链接**：`src/data/site.ts`
-   - `name` 是英文 handle（`lczhuigz`），`nameZh` 是中文名（`段辉园`），
-     留空 `nameZh` 就只显示 handle
-   - 中文名会自动出现在：导航 / 页脚的品牌、首屏大标题、关于页标题与自我介绍、
-     浏览器标签标题、`<meta name="author">`、Person 结构化数据、友链页的站点信息
-   - 首屏标题里 `@lczhuigz` 是 handle，`段辉园` 是中文名，改 `site.ts` 一处即可
+   - `name`（`lczhuigz`）是站点 handle：导航品牌、页脚、首屏大标题、浏览器标签、
+     `meta author`、Person 结构化数据全部用它
+   - `realName`（`段辉园`）是真名，**只出现在关于页正文**
+     （「我是段辉园（@lczhuigz）」），不参与站点品牌
+   - 不想露真名就把 `realName` 改成空字符串，关于页那段会自动去掉名字和括号
 2. **关于页内容**：都在 `src/data/site.ts` 里，按块拆开：
    - `education` 学历（在读 / 已毕业 + 学校 + 专业 + 一句说明）
    - `quickFacts` 快问快答、`techStack` 技术栈分组

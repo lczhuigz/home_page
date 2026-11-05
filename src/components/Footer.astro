@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { displayName, nav, site, socials } from '../data/site';
+import { nav, site, socials } from '../data/site';
 import { attrsFor, attrsForSocial } from '../lib/links';
 
 const year = new Date().getFullYear();
@@ -12,8 +12,8 @@ const footLinks = nav.filter((item) => item.label !== '首页');
     <div class="footer__grid">
       <div class="footer__brand">
         <a class="brand" href="/">
-          <span class="brand__mark" aria-hidden="true">{displayName.slice(0, 1).toUpperCase()}</span>
-          <span class="brand__text">{displayName}</span>
+          <span class="brand__mark" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</span>
+          <span class="brand__text">{site.name}</span>
         </a>
         <p>{site.tagline}</p>
         <p class="mono" style="font-size: 0.72rem; letter-spacing: 0.04em;">

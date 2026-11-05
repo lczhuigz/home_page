@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { friends, inspirations, type Friend } from '../data/friends';
-import { fullName, site } from '../data/site';
+import { site } from '../data/site';
 import { externalAttrs } from '../lib/links';
 
 const groups: Friend['group'][] = ['一直联系', '经常串门'];
@@ -81,7 +81,7 @@ const host = Astro.site?.host ?? site.url.replace('https://', '');
       >
         <div class="fact" style="display: block;">
           <p class="fact__label">名称</p>
-          <p class="fact__value">{fullName}</p>
+          <p class="fact__value">{site.name}</p>
         </div>
         <div class="fact" style="display: block;">
           <p class="fact__label">地址</p>

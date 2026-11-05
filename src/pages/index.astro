@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { displayName, heroSocials, rotatingWords, site, skillTicker } from '../data/site';
+import { heroSocials, rotatingWords, site, skillTicker } from '../data/site';
 import { stats, statsUpdatedLabel } from '../data/stats';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
@@ -24,10 +24,7 @@ const words = JSON.stringify(rotatingWords);
 
         <h1 class="hero__title">
           你好，我是<br />
-          <span class="hero__name">
-            <span class="grad-text">{displayName}</span>
-            {site.nameZh && <span class="hero__handle">@{site.name}</span>}
-          </span>
+          <span class="grad-text">{site.name}</span>
         </h1>
 
         <p class="hero__sub">
@@ -72,7 +69,7 @@ const words = JSON.stringify(rotatingWords);
         <div class="portrait__frame">
           <img
             src={site.avatar}
-            alt={`${displayName} 的头像`}
+            alt={`${site.name} 的头像`}
             width="360"
             height="360"
             loading="eager"
@@ -162,7 +159,7 @@ const words = JSON.stringify(rotatingWords);
       <span class="eyebrow">03 / About</span>
       <h2 style="margin-top: 0.75rem;">一个还在不断加载中的开发者</h2>
       <p class="prose" style="margin-top: 1rem;">
-        我是 <strong>{displayName}</strong>，计算机科学与技术在读，方向是嵌入式与 FPGA。日常是上课、写代码、调硬件，
+        我是 <strong>{site.name}</strong>，计算机科学与技术在读，方向是嵌入式与 FPGA。日常是上课、写代码、调硬件，
         以及把「为什么又跑不起来」变成一篇能救下一个自己的文章。
         如果你也对单片机、FPGA 和把数据搬来搬去感兴趣，欢迎来聊聊。
       </p>

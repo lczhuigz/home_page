@@ -6,13 +6,13 @@ export const site = {
   /** 站点域名，和 astro.config.mjs 里的 site 保持一致 */
   url: 'https://me.lczhuigz.cn',
   name: 'lczhuigz',
-  /** 中文名 / 昵称，留空则页面上只显示 lczhuigz */
-  nameZh: '',
+  /** 真名，只写在「关于」页正文里，全站品牌 / 标题 / 页脚一律用 name */
+  realName: '段辉园',
   role: '计算机科学与技术在读 · 嵌入式与 FPGA 方向',
   tagline: 'You Only Live Once —— 把折腾过的东西都留在这里。',
   motto: '知行合一，止于至善',
   description:
-    '段辉园（lczhuigz）的个人主页：计算机科学与技术专业在读，方向是嵌入式与 FPGA。记录 C/C++、单片机、FPGA 与硬件调试，也写 Linux 和前端折腾笔记。',
+    'lczhuigz 的个人主页：计算机科学与技术专业在读，方向是嵌入式与 FPGA。记录 C/C++、单片机、FPGA 与硬件调试，也写 Linux 和前端折腾笔记。',
   keywords: ['lczhuigz', '个人主页', '博客', 'Linux', '单片机', '前端', 'Astro'],
   locale: 'zh-CN',
   avatar: '/avatar.jpg',
@@ -26,11 +26,8 @@ export const site = {
   startYear: 2023,
 } as const;
 
-/** 页面上优先展示中文名，没填就退回 lczhuigz */
-export const displayName = site.nameZh || site.name;
-
-/** 「段辉园（lczhuigz）」这种中英并排的写法，用于自我介绍和友链信息 */
-export const fullName = site.nameZh ? `${site.nameZh}（${site.name}）` : site.name;
+/** 真名，只在关于页正文里用，不参与站点品牌 */
+export const realName = site.realName;
 
 export type Social = {
   label: string;

@@ -88,25 +88,17 @@ def main() -> None:
     # 左上角标记
     draw.rounded_rectangle((72, 64, 136, 128), radius=18, fill=(139, 92, 246, 255))
     logo_font = load_font("bold", 34)
-    draw.text((104, 96), "段", font=logo_font, fill=(255, 255, 255, 255), anchor="mm")
+    draw.text((104, 96), "L", font=logo_font, fill=(255, 255, 255, 255), anchor="mm")
     draw.text((152, 96), "lczhuigz", font=load_font("bold", 26), fill=(236, 237, 245, 255), anchor="lm")
 
-    # 主标题：中文名 + 英文 handle（跟在名字右下，基线对齐）
-    name_box = gradient_text(
+    # 主标题（站点对外只用 handle，中文名只在关于页出现）
+    gradient_text(
         canvas,
-        (72, 186),
-        "段辉园",
-        load_font("bold", 148),
+        (72, 200),
+        "lczhuigz",
+        load_font("bold", 132),
         [(167, 139, 250), (139, 92, 246), (34, 211, 238)],
     )
-    if name_box:
-        draw.text(
-            (name_box[0] + name_box[2] + 24, name_box[1] + name_box[3] - 6),
-            "@lczhuigz",
-            font=load_font("mono", 32),
-            fill=(150, 155, 178, 255),
-            anchor="ls",
-        )
 
     draw.text(
         (74, 410),

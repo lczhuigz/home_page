@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { friends, inspirations, type Friend } from '../data/friends';
 import { site } from '../data/site';
+import { externalAttrs } from '../lib/links';
 
 const groups: Friend['group'][] = ['一直联系', '经常串门'];
 const byGroup = (group: Friend['group']) => friends.filter((f) => f.group === group);
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
 // 域名跟随 astro.config.mjs 的 site
 const host = Astro.site?.host ?? site.url.replace('https://', '');
 ---
@@ -25,7 +25,7 @@ const host = Astro.site?.host ?? site.url.replace('https://', '');
           <p class="group-title">{group}</p>
           <div class="friends-grid">
             {byGroup(group).map((friend) => (
-              <a class="friend" href={friend.href} {...ext}>
+              <a class="friend" href={friend.href} {...externalAttrs}>
                 <span class="friend__avatar" aria-hidden="true">
                   <span>{friend.name.slice(0, 1).toUpperCase()}</span>
                   {friend.avatar && (
@@ -50,7 +50,7 @@ const host = Astro.site?.host ?? site.url.replace('https://', '');
     >
       {
         inspirations.map((item) => (
-          <a class="friend" href={item.href} {...ext}>
+          <a class="friend" href={item.href} {...externalAttrs}>
             <span
               class="friend__avatar"
               style="background: var(--surface-2); color: var(--text-soft);"
@@ -71,7 +71,7 @@ const host = Astro.site?.host ?? site.url.replace('https://', '');
       <h2 style="margin-top: 0.8rem; font-size: clamp(1.4rem, 3vw, 1.9rem);">交换友链？</h2>
       <p class="prose" style="margin-top: 1rem;">
         欢迎直接发邮件到 <a href={`mailto:${site.email}`}>{site.email}</a>，或者
-        <a href={site.github} {...ext}>在 GitHub 上找我</a>。如果你的站点也是个人博客、笔记或者
+        <a href={site.github} {...externalAttrs}>在 GitHub 上找我</a>。如果你的站点也是个人博客、笔记或者
         作品集，我一般都会加。
       </p>
 

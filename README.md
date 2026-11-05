@@ -15,6 +15,7 @@ npm run dev      # 本地开发，默认 http://localhost:4321
 npm run build    # 构建到 dist/
 npm run preview  # 本地预览构建产物（需要先 build）
 npm run verify   # 逐页 / 逐主题 / 桌面+移动截图到 .shots/，并检查横向溢出
+npm run audit:links  # 检查站内链接留在当前页、站外链接新开标签页
 npm run data     # 手动刷新全部数据（GitHub 统计 + 博客 feed）
 npm run stats    # 只刷新 GitHub 统计（仓库数 / Star / 关注者）
 npm run blog     # 只刷新博客数据（文章数 + 最近几篇）

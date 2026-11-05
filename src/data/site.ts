@@ -7,7 +7,7 @@ export const site = {
   url: 'https://me.lczhuigz.cn',
   name: 'lczhuigz',
   /** 中文名 / 昵称，暂时留空则只显示 lczhuigz */
-  nameZh: '',
+  nameZh: '段辉园',
   role: '计算机专业在读 · 什么都想试一点的折腾型选手',
   tagline: 'You Only Live Once —— 把折腾过的东西都留在这里。',
   description:
@@ -39,6 +39,7 @@ export const socials: Social[] = [
   { label: '博客', href: 'https://blog.lczhuigz.cn', icon: 'hexo' },
   { label: '运动主页', href: 'https://sports-page.lczhuigz.cn', icon: 'strava' },
   { label: 'Bilibili', href: 'https://space.bilibili.com/1351041864', icon: 'bilibili' },
+  { label: '抖音', href: 'https://www.douyin.com/user/MS4wLjABAAAAqf_sgaer0yOK3WFpoxUuIDXEmaOxOe-nB3JQRYKV2ALPnp0nRjZO-jBp3vc0PKph', icon: 'tiktok'},
   { label: 'Gitee', href: 'https://gitee.com/lczhuigz', icon: 'gitee' },
   { label: 'GitCode', href: 'https://gitcode.com/lczhuigz', icon: 'git' },
   { label: '邮箱', href: 'mailto:lczhuigz@163.com', icon: 'mail', external: false },
@@ -69,7 +70,7 @@ export const skillTicker = [
 
 /** 关于页的「快问快答」 */
 export const quickFacts = [
-  { icon: 'linux', label: '主力桌面', value: 'Windows 11 + WSL2（Ubuntu）' },
+  { icon: 'linux', label: '主力桌面', value: 'Windows 11 + WSL2（Debian13）' },
   { icon: 'code', label: '常用编辑器', value: 'VS Code，偶尔 Neovim' },
   { icon: 'terminal', label: '第一门语言', value: 'C —— 从 51 单片机的点灯开始' },
   { icon: 'cloud', label: '部署习惯', value: 'Vercel + Cloudflare' },

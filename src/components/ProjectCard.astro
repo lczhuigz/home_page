@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { Project } from '../data/projects';
+import { externalAttrs } from '../lib/links';
 
 interface Props {
   project: Project;
@@ -9,7 +10,6 @@ interface Props {
 
 const { project, index = 0 } = Astro.props;
 const primaryHref = project.href ?? project.repo ?? '#';
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
 ---
 
 <article
@@ -33,13 +33,13 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
   </ul>
 
   <div class="card__foot">
-    <a class="card__cta" href={primaryHref} {...ext}>
+    <a class="card__cta" href={primaryHref} {...externalAttrs}>
       去看看
       <Icon name="arrow" size={14} />
     </a>
     {
       project.repo && project.href && (
-        <a class="card__repo" href={project.repo} {...ext} aria-label={`${project.title} 源码`}>
+        <a class="card__repo" href={project.repo} {...externalAttrs} aria-label={`${project.title} 源码`}>
           源码
         </a>
       )
@@ -49,7 +49,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
   <a
     class="card__link-layer"
     href={primaryHref}
-    {...ext}
+    {...externalAttrs}
     tabindex="-1"
     aria-hidden="true"
   ></a>

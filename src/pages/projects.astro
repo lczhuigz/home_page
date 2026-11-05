@@ -4,6 +4,7 @@ import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { site } from '../data/site';
 import { projects } from '../data/projects';
+import { externalAttrs } from '../lib/links';
 
 const repos = [
   { name: 'data_structure_course', lang: 'C', note: '数据结构课程作业' },
@@ -13,8 +14,6 @@ const repos = [
   { name: 'preparation-for-the-cepa', lang: 'C', note: '备赛 / 备考用的一些练习' },
   { name: 'lczhuigz', lang: 'Markdown', note: 'GitHub 主页的 README' },
 ];
-
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
 ---
 
 <Base
@@ -41,7 +40,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
         <h2>还有一些仓库</h2>
         <p>课程代码和练习大多在这里，写得不漂亮，但都是自己敲过的。</p>
       </div>
-      <a class="link-more" href={site.github} {...ext}>
+      <a class="link-more" href={site.github} {...externalAttrs}>
         全部仓库 <Icon name="arrow" size={13} />
       </a>
     </div>
@@ -49,7 +48,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
     <div class="posts reveal">
       {
         repos.map((repo) => (
-          <a class="post-row" href={`${site.github}/${repo.name}`} {...ext}>
+          <a class="post-row" href={`${site.github}/${repo.name}`} {...externalAttrs}>
             <span class="post-row__date">{repo.lang}</span>
             <span>
               <span class="post-row__title mono">{repo.name}</span>

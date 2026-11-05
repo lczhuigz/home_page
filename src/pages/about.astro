@@ -2,10 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { quickFacts, site, socials, timeline } from '../data/site';
-
-/** 新窗口打开外部链接 */
-const ext = (external?: boolean) =>
-  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
+import { attrsForSocial } from '../lib/links';
 
 const skills = [
   {
@@ -127,7 +124,7 @@ const skills = [
         {
           socials.map((s) => (
             <li>
-              <a class="social-link" href={s.href} {...ext(s.external)}>
+              <a class="social-link" href={s.href} {...attrsForSocial(s.external)}>
                 <Icon name={s.icon} size={15} />
                 {s.label}
               </a>

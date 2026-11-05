@@ -1,13 +1,10 @@
 ---
 import Icon from './Icon.astro';
 import { nav, site, socials } from '../data/site';
+import { attrsFor, attrsForSocial } from '../lib/links';
 
 const year = new Date().getFullYear();
 const footLinks = nav.filter((item) => item.label !== '首页');
-
-/** 新窗口打开外部链接 */
-const ext = (external?: boolean) =>
-  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
 ---
 
 <footer class="footer">
@@ -31,7 +28,7 @@ const ext = (external?: boolean) =>
           {
             footLinks.map((item) => (
               <li>
-                <a href={item.href} {...ext(item.external)}>
+                <a href={item.href} {...attrsFor(item.external)}>
                   {item.label}
                 </a>
               </li>
@@ -48,7 +45,7 @@ const ext = (external?: boolean) =>
               <li>
                 <a
                   href={s.href}
-                  {...ext(s.external)}
+                  {...attrsForSocial(s.external)}
                   style="display: inline-flex; align-items: center; gap: 0.35rem;"
                 >
                   <Icon name={s.icon} size={13} />

@@ -13,7 +13,8 @@
     "stats": "node scripts/fetch-stats.mjs",
     "blog": "node scripts/fetch-blog.mjs",
     "data": "npm run stats && npm run blog",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "audit:links": "node scripts/audit-links.mjs"
   },
   "dependencies": {
     "astro": "^7.3.8",

@@ -1,14 +1,11 @@
 ---
 import Icon from './Icon.astro';
 import { nav, site } from '../data/site';
+import { attrsFor, externalAttrs } from '../lib/links';
 
 const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) =>
   !href.startsWith('http') && (href.replace(/\/+$/, '') || '/') === current;
-
-/** 新窗口打开外部链接 */
-const ext = (external?: boolean) =>
-  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
 ---
 
 <header class="nav" id="site-nav">
@@ -27,7 +24,8 @@ const ext = (external?: boolean) =>
                 class:list={['nav__link', { 'nav__link--accent': item.accent }]}
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                {...ext(item.external)}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
               >
                 {item.label}
                 {item.external && <Icon name="arrow" size={12} class="nav__link-icon" />}
@@ -39,7 +37,7 @@ const ext = (external?: boolean) =>
     </nav>
 
     <div class="nav__actions">
-      <a class="icon-btn" href={site.github} {...ext(true)} aria-label="GitHub">
+      <a class="icon-btn" href={site.github} {...externalAttrs} aria-label="GitHub">
         <Icon name="github" size={17} />
       </a>
       <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="切换深浅色主题">
@@ -82,7 +80,7 @@ const ext = (external?: boolean) =>
       {
         nav.map((item) => (
           <li>
-            <a href={item.href} {...ext(item.external)}>
+            <a href={item.href} {...attrsFor(item.external)}>
               {item.label}
             </a>
           </li>

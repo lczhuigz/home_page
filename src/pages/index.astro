@@ -6,14 +6,11 @@ import { heroSocials, rotatingWords, site, skillTicker } from '../data/site';
 import { stats, statsUpdatedLabel } from '../data/stats';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
+import { attrsForSocial, externalAttrs } from '../lib/links';
 
 const featured = projects.filter((p) => p.featured);
 const latest = posts.slice(0, 4);
 const words = JSON.stringify(rotatingWords);
-
-/** 新窗口打开外部链接 */
-const ext = (external?: boolean) =>
-  external === false ? {} : ({ target: '_blank', rel: 'noopener noreferrer' } as const);
 ---
 
 <Base>
@@ -46,7 +43,7 @@ const ext = (external?: boolean) =>
             看看我做了什么
             <Icon name="arrow" size={15} class="btn__arrow" />
           </a>
-          <a class="btn" href={site.blogUrl} {...ext(true)}>
+          <a class="btn" href={site.blogUrl} {...externalAttrs}>
             <Icon name="hexo" size={15} />
             去博客逛逛
           </a>
@@ -56,7 +53,7 @@ const ext = (external?: boolean) =>
           {
             heroSocials.map((s) => (
               <li>
-                <a class="social-link" href={s.href} {...ext(s.external)}>
+                <a class="social-link" href={s.href} {...attrsForSocial(s.external)}>
                   <Icon name={s.icon} size={15} />
                   {s.label}
                 </a>
@@ -136,7 +133,7 @@ const ext = (external?: boolean) =>
         <h2>最近在写</h2>
         <p>大部分是环境配置和踩坑记录，方便下一次的自己。</p>
       </div>
-      <a class="link-more" href={site.blogUrl} {...ext(true)}>
+      <a class="link-more" href={site.blogUrl} {...externalAttrs}>
         全部文章 <Icon name="arrow" size={13} />
       </a>
     </div>
@@ -144,7 +141,7 @@ const ext = (external?: boolean) =>
     <div class="posts reveal">
       {
         latest.map((post) => (
-          <a class="post-row" href={post.href} {...ext(true)}>
+          <a class="post-row" href={post.href} {...externalAttrs}>
             <span class="post-row__date">{post.date.replaceAll('-', '.')}</span>
             <span>
               <span class="post-row__title">{post.title}</span>

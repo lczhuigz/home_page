@@ -4,7 +4,15 @@
  * - 品牌图标来自 simple-icons（24×24，纯色填充）
  * - 通用图标是手写的描边图标，风格保持一致
  */
-import { siBilibili, siGitee, siGit, siGithub, siHexo, siLinux } from 'simple-icons';
+import {
+  siBilibili,
+  siGitee,
+  siGit,
+  siGithub,
+  siHexo,
+  siLinux,
+  siTiktok,
+} from 'simple-icons';
 
 interface Props {
   name: string;
@@ -21,6 +29,7 @@ const brands: Record<string, { path: string }> = {
   git: siGit,
   hexo: siHexo,
   linux: siLinux,
+  tiktok: siTiktok,
 };
 
 const stroke: Record<string, string> = {

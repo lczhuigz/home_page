@@ -76,13 +76,18 @@ scripts/
    - 中文名会自动出现在：导航 / 页脚的品牌、首屏大标题、关于页标题与自我介绍、
      浏览器标签标题、`<meta name="author">`、Person 结构化数据、友链页的站点信息
    - 首屏标题里 `@lczhuigz` 是 handle，`段辉园` 是中文名，改 `site.ts` 一处即可
-2. **头像**：替换 `public/avatar.jpg`（当前是 GitHub 头像）
-3. **项目**：`src/data/projects.ts`，`tone` 可选 `violet | cyan | pink | amber | lime`
-4. **文章**：自动。`src/data/blog.json` 从博客 `atom.xml` 生成，不用手改；
+2. **关于页内容**：都在 `src/data/site.ts` 里，按块拆开：
+   - `education` 学历（在读 / 已毕业 + 学校 + 专业 + 一句说明）
+   - `quickFacts` 快问快答、`techStack` 技术栈分组
+   - `awards` 荣誉（`year` / `title`，可选 `href` 变成链接）、`certificates` 证书
+   - `blogTopics` 博客内容分类、`timeline` 时间线
+3. **头像**：替换 `public/avatar.jpg`（当前是 GitHub 头像）
+4. **项目**：`src/data/projects.ts`，`tone` 可选 `violet | cyan | pink | amber | lime`
+5. **文章**：自动。`src/data/blog.json` 从博客 `atom.xml` 生成，不用手改；
    换博客地址就改 `scripts/fetch-blog.mjs` 里的 `BLOG_FEED`（或 workflow 里的环境变量）
-5. **友链**：`src/data/friends.ts`
-6. **主题色**：`src/styles/global.css` 里的 `--accent`、`--accent-2`、`--accent-3`
-7. **域名**：只改 `astro.config.mjs` 的 `site`（或在 Vercel 里设 `SITE_URL` 环境变量）。
+6. **友链**：`src/data/friends.ts`
+7. **主题色**：`src/styles/global.css` 里的 `--accent`、`--accent-2`、`--accent-3`
+8. **域名**：只改 `astro.config.mjs` 的 `site`（或在 Vercel 里设 `SITE_URL` 环境变量）。
    canonical、`og:url`、`robots.txt`、`sitemap.xml` 全都会跟着变，不用再动别的文件。
 
 ## 首页数字怎么来的

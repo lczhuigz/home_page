@@ -8,10 +8,11 @@ export const site = {
   name: 'lczhuigz',
   /** 中文名 / 昵称，留空则页面上只显示 lczhuigz */
   nameZh: '',
-  role: '计算机专业在读 · 什么都想试一点的折腾型选手',
+  role: '计算机科学与技术在读 · 嵌入式与 FPGA 方向',
   tagline: 'You Only Live Once —— 把折腾过的东西都留在这里。',
+  motto: '知行合一，止于至善',
   description:
-    '段辉园（lczhuigz）的个人主页：一个爱折腾 Linux、单片机和前端的计算机专业学生。这里汇总我的项目、笔记与友链。',
+    '段辉园（lczhuigz）的个人主页：计算机科学与技术专业在读，方向是嵌入式与 FPGA。记录 C/C++、单片机、FPGA 与硬件调试，也写 Linux 和前端折腾笔记。',
   keywords: ['lczhuigz', '个人主页', '博客', 'Linux', '单片机', '前端', 'Astro'],
   locale: 'zh-CN',
   avatar: '/avatar.jpg',
@@ -69,19 +70,98 @@ export const rotatingWords = ['写代码', '折腾 Linux', '骑单车', '拆单�
 
 /** 跑马灯里的技能关键词 */
 export const skillTicker = [
-  'C', 'C++', 'Java', 'Python', 'HTML / CSS', 'JavaScript',
-  'Linux', 'WSL', 'Docker', 'Git', 'MySQL', '51 单片机',
-  'Astro', 'Hexo', 'Cloudflare', 'Nginx',
+  'C', 'C++', 'Python', 'Verilog', 'STM32', 'ESP32', 'FPGA',
+  'Keil', 'STM32CubeMX', 'Git', 'Linux / WSL', 'Docker',
+  'I2C / SPI / UART / CAN', 'Hexo', 'Cloudflare', 'Astro',
 ];
 
 /** 关于页的「快问快答」 */
 export const quickFacts = [
-  { icon: 'linux', label: '主力桌面', value: 'Windows 11 + WSL2（Debian13）' },
-  { icon: 'code', label: '常用编辑器', value: 'VS Code，偶尔 Neovim' },
-  { icon: 'terminal', label: '第一门语言', value: 'C —— 从 51 单片机的点灯开始' },
-  { icon: 'cloud', label: '部署习惯', value: 'Vercel + Cloudflare' },
-  { icon: 'cpu', label: '在学什么', value: '数据结构、Java Web、计算机网络' },
-  { icon: 'book', label: '副业爱好', value: '骑行、摄影、收集好用的命令行工具' },
+  { icon: 'book', label: '现在在读', value: '湖北文理学院理工学院' },
+  { icon: 'code', label: '专业', value: '计算机科学与技术（专升本）' },
+  { icon: 'terminal', label: '主力语言', value: 'C / C++，Python 辅助' },
+  { icon: 'cpu', label: '硬件平台', value: 'STM32 / ESP32，正在学 FPGA' },
+  { icon: 'layers', label: '常用工具', value: 'Keil、STM32CubeMX、VS Code、Git' },
+  { icon: 'spark', label: '信条', value: '知行合一，止于至善' },
+];
+
+/** 学历：关于页 */
+export const education = [
+  {
+    status: '在读',
+    school: '湖北文理学院理工学院',
+    major: '计算机科学与技术（专升本）',
+    note: '正在补数据结构与算法、操作系统原理、计算机网络这些计算机基础。',
+  },
+  {
+    status: '已毕业',
+    school: '湖北三峡职业技术大学',
+    major: '电子信息工程技术',
+    note: '在这里第一次把代码烧进单片机，也第一次意识到硬件和软件之间只隔着一层寄存器。',
+  },
+];
+
+/** 技术栈：关于页 */
+export const techStack = [
+  {
+    title: '编程语言',
+    items: ['C / C++', 'Python', 'Verilog', 'SQL'],
+  },
+  {
+    title: '嵌入式与硬件',
+    items: ['STM32', 'ESP32', '传感器驱动', 'I2C / SPI / UART / CAN'],
+  },
+  {
+    title: '工具链',
+    items: ['Keil', 'STM32CubeMX', 'VS Code', 'Git', '示波器 / 万用表'],
+  },
+  {
+    title: '正在补的课',
+    items: ['数据结构与算法', '操作系统原理', '计算机网络', 'FPGA 时序'],
+  },
+];
+
+/** 荣誉与奖项：关于页 */
+export const awards = [
+  { year: '2026', title: '湖北省职业院校技能大赛 · 集成电路与电器赛道三等奖' },
+  {
+    year: '2025',
+    title: '“中银杯”湖北省职业院校技能大赛 · 智能电子产品设计与开发赛项（推荐队）三等奖',
+  },
+  { year: '2025', title: '中国国际大学生创新大赛湖北省复赛 · 职教赛道铜奖' },
+  { year: '2025', title: '第十七届感恩征文活动二等奖' },
+  { year: '2025', title: '“三职星青年”提名奖' },
+  {
+    year: '2024–2025',
+    title: '国家奖学金',
+  },
+  {
+    year: '2024 / 2025',
+    title: '一带一路暨金砖国家技能发展与技术创新大赛 · 决赛二等奖',
+  },
+  { year: '2024', title: '一带一路暨金砖国家技能发展与技术创新大赛 · 选拔赛优秀奖' },
+  { year: '2023–2024', title: '国家励志奖学金、院级优秀学生' },
+  {
+    year: '报道',
+    title: '《宜昌综合》对参赛经历的事迹报道',
+    href: 'https://nginx-sxrmtzx.sxrmapp.cn3x.com.cn/sxrmtzx/site1/m/c175/a952597.html',
+  },
+];
+
+/** 证书：关于页 */
+export const certificates = [
+  '全国计算机等级考试 二级（C 语言）',
+  '全国计算机等级考试 一级（成绩优秀）',
+  '特种作业操作证（电工，三级）',
+  '机动车驾驶证 C1',
+];
+
+/** 博客里写什么：关于页 */
+export const blogTopics = [
+  { label: '技术解析', note: 'C/C++、外设驱动、RTOS 原理' },
+  { label: '项目实战', note: '嵌入式项目的开发日志' },
+  { label: '效率工具', note: '开发与学习的工作流' },
+  { label: '碎片思考', note: '读书、看文章后的随想' },
 ];
 
 /** 时间线：关于页 */
@@ -92,6 +172,11 @@ export const timeline = [
     body: '把课程作业和练习从硬盘搬进仓库，第一次体会到 Git 的价值是在一次误删之后。',
   },
   {
+    year: '2024–2025',
+    title: '竞赛与奖学金',
+    body: '金砖国家技能大赛、湖北省职业院校技能大赛、大学生创新大赛陆续有了结果，也拿到了国家奖学金。',
+  },
+  {
     year: '2025',
     title: '博客上线',
     body: '用 Hexo + Redefine 搭起 blog.lczhuigz.cn，把环境配置、报错排查这些「下次还会用」的东西写下来。',
@@ -100,6 +185,11 @@ export const timeline = [
     year: '2026',
     title: '运动主页与图床',
     body: '基于 running_page 接上小米运动健康 → Keep → GitHub Actions 的数据链路，顺手用 Cloudflare 自建图床。',
+  },
+  {
+    year: '2026',
+    title: '专升本，继续往上补',
+    body: '从电子信息工程技术转到计算机科学与技术，一边补数据结构与操作系统，一边把嵌入式项目做深。',
   },
   {
     year: '现在',

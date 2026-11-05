@@ -49,7 +49,7 @@ for (const [theme, size, suffix] of [
   await page.setViewport({ ...size, deviceScaleFactor: 1 });
 
   for (const [name, path] of pages) {
-    if (suffix === 'mobile' && name !== 'home' && name !== 'projects') continue;
+    if (suffix === 'mobile' && !['home', 'projects', 'about'].includes(name)) continue;
 
     await page.evaluateOnNewDocument((t) => {
       try {

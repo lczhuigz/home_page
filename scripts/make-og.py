@@ -110,14 +110,14 @@ def main() -> None:
 
     draw.text(
         (74, 410),
-        "计算机专业在读，什么都想试一点的折腾型选手",
+        "计算机科学与技术 · 嵌入式与 FPGA 方向",
         font=load_font("regular", 30),
         fill=(200, 203, 218, 255),
     )
 
     draw.text(
         (74, 462),
-        "博客 · 运动数据 · 自建图床 · 51 单片机",
+        "C/C++ · STM32/ESP32 · Verilog · FPGA",
         font=load_font("regular", 24),
         fill=(132, 137, 158, 255),
     )

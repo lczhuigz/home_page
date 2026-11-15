@@ -1,6 +1,6 @@
 {
   "user": "lczhuigz",
-  "updatedAt": "2026-11-14T08:53:56.314Z",
+  "updatedAt": "2026-11-15T09:13:43.308Z",
   "repos": 27,
   "followers": 20,
   "following": 57,
@@ -12,11 +12,11 @@
       "count": 10
     },
     {
-      "name": "Vue",
+      "name": "HTML",
       "count": 3
     },
     {
-      "name": "HTML",
+      "name": "Vue",
       "count": 3
     },
     {
@@ -24,10 +24,10 @@
       "count": 2
     },
     {
-      "name": "Astro",
+      "name": "Batchfile",
       "count": 1
     }
   ],
-  "lastPush": "2026-11-14T04:34:47Z",
+  "lastPush": "2026-11-15T04:23:53Z",
   "reposScanned": 25
 }

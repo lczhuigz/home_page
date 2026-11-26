@@ -1,10 +1,10 @@
 {
   "user": "lczhuigz",
-  "updatedAt": "2026-11-04T09:00:29.889Z",
+  "updatedAt": "2026-11-26T10:44:57.469Z",
   "repos": 27,
   "followers": 21,
-  "following": 58,
-  "stars": 14,
+  "following": 57,
+  "stars": 17,
   "forks": 3,
   "topLanguages": [
     {
@@ -16,18 +16,18 @@
       "count": 3
     },
     {
+      "name": "Vue",
+      "count": 3
+    },
+    {
       "name": "Python",
       "count": 2
     },
     {
-      "name": "Vue",
-      "count": 2
-    },
-    {
-      "name": "Astro",
+      "name": "Batchfile",
       "count": 1
     }
   ],
-  "lastPush": "2026-11-04T07:22:35Z",
+  "lastPush": "2026-11-26T06:26:33Z",
   "reposScanned": 25
 }

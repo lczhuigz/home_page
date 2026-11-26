@@ -91,4 +91,30 @@ export const projects: Project[] = [
     tone: 'violet',
     kicker: 'MCU',
   },
+  {
+    slug: 'snake',
+    title: '贪吃蛇',
+    subtitle: '一条会跟着你的照片跑的小蛇',
+    description:
+      '用 Vue 3 + Canvas 2D 从零写的贪吃蛇：能上传照片当蛇头，蛇身是一条连续摆动的曲线，四档速度可选，路上还会随机刷限时奖励食物。音效是 Web Audio 现场合成的，手机上有虚拟方向键，最高分存在浏览器里。',
+    href: 'https://snake.lczhuigz.cn',
+    repo: 'https://github.com/lczhuigz/snake_game_vue',
+    status: '在线可玩',
+    tags: ['Vue 3', 'Vite', 'Canvas 2D'],
+    tone: 'lime',
+    kicker: 'SNAKE',
+  },
+  {
+    slug: 'sokoban',
+    title: '推箱子',
+    subtitle: '30 关的经典箱子谜题',
+    description:
+      'Vue 3 + Vite 写的推箱子，30 个关卡从入门到大师，支持无限撤销、计时和最佳成绩记录。内置关卡编辑器可以自己摆箱子，进度存在本地，手机上滑动或者按虚拟方向键都能玩。',
+    href: 'https://sokoban.lczhuigz.cn',
+    repo: 'https://github.com/lczhuigz/sokoban',
+    status: '在线可玩',
+    tags: ['Vue 3', 'Vite', '关卡编辑器'],
+    tone: 'amber',
+    kicker: 'SOKOBAN',
+  },
 ];

@@ -56,10 +56,10 @@ export const heroSocials: Social[] = socials.filter((s) => s.label !== '博客')
 
 export const nav: NavItem[] = [
   { label: '首页', href: '/' },
-  { label: '关于', href: '/about/' },
   { label: '项目', href: '/projects/' },
   { label: '友链', href: '/friends/' },
   { label: '博客', href: 'https://blog.lczhuigz.cn', external: true, accent: true },
+  { label: '关于', href: '/about/' },
 ];
 
 /** 首屏滚动出现的关键词 */
@@ -102,7 +102,7 @@ export const education = [
 export const techStack = [
   {
     title: '编程语言',
-    items: ['C / C++', 'Python', 'Verilog', 'SQL'],
+    items: ['C / C++', 'Python', 'SQL'],
   },
   {
     title: '嵌入式与硬件',
@@ -155,7 +155,7 @@ export const certificates = [
 
 /** 博客里写什么：关于页 */
 export const blogTopics = [
-  { label: '技术解析', note: 'C/C++、外设驱动、RTOS 原理' },
+  { label: '技术解析', note: 'C/C++、外设驱动' },
   { label: '项目实战', note: '嵌入式项目的开发日志' },
   { label: '效率工具', note: '开发与学习的工作流' },
   { label: '碎片思考', note: '读书、看文章后的随想' },

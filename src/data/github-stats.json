@@ -1,8 +1,8 @@
 {
   "user": "lczhuigz",
-  "updatedAt": "2026-11-26T10:44:57.469Z",
+  "updatedAt": "2026-11-27T10:45:58.305Z",
   "repos": 27,
-  "followers": 21,
+  "followers": 22,
   "following": 57,
   "stars": 17,
   "forks": 3,
@@ -12,11 +12,11 @@
       "count": 10
     },
     {
-      "name": "HTML",
+      "name": "Vue",
       "count": 3
     },
     {
-      "name": "Vue",
+      "name": "HTML",
       "count": 3
     },
     {
@@ -28,6 +28,6 @@
       "count": 1
     }
   ],
-  "lastPush": "2026-11-26T06:26:33Z",
+  "lastPush": "2026-11-27T06:16:28Z",
   "reposScanned": 25
 }
